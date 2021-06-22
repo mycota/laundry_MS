@@ -1,0 +1,71 @@
+{% extends "adm/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %} 
+	
+	
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="{% url 'view_mac' %}">Machines</a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Machine Details</h6>
+
+
+	<div class="pull-right" style="margin-right:100px;">
+		<a href="javascript:Clickheretoprint()" style="font-size:20px; position:absolute; margin-top: 40px; left: 800px"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+		</div>
+	
+	<div class="content" id="content">
+	<div class="content-section">
+	  <div class="media">
+	    <img class="rounded-circle account-img" src="{{ obj.image.url }}">
+	    
+	  </div>
+	  <!-- FORM HERE -->
+	  <!-- <div class="container-section"> -->
+		
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Machine information.</legend>
+				
+				<table class="table" style="background: ; ">
+   
+				    <tr>
+				    <td>
+				    <h4>Washing Machine name:</h4>
+				    <p class="text-secondary">{{ obj.machine_name }}</p>
+				    </td>
+				    <td>
+				    <h4>Model:</h4>
+				    <p class="text-secondary">{{ obj.model }}</p>
+				    </td>
+				    <tr>
+				    <td>
+				    <h4>Manufacturer:</h4>
+				    <p class="text-secondary">{{ obj.manufacturer }}</p>
+				    </td>
+				    <td>
+				    <h4>Price:</h4>
+				    <p class="text-secondary">{{ obj.price }}</p>
+				    </td>  
+				    </tr>
+				    <tr>
+				    <td>
+				    <h4>Date bought:</h4>
+				    <p class="text-secondary">{{ obj.date_bought|date:"F d, Y" }}</p>
+				    </td>
+				    <td>
+				    
+				    </td>  
+				    </tr>
+				    
+				</table>
+				
+			</fieldset>
+			
+		</div>	
+		
+	</div>
+
+</div>	
+	
+{% endblock %}

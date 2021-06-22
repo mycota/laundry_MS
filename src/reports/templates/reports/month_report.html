@@ -1,0 +1,129 @@
+
+{% extends "adm/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="#"></a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Report</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;">
+Provide search method </h5></center>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<cnter>
+<form class="form-inline my-2 m" method="POST" action="">
+      {% csrf_token %}
+    <div class="form-group" style="width: 250px;">
+     <strong>From:</strong> 
+      <input type="date" name="frdate" class="form-control" placeholder="Enter quantity" required="" aria-label="item">
+    </div>
+
+    <div class="form-group" style="width: 250px;">
+     <strong>To:</strong> 
+      <input type="date" name="todate" class="form-control" placeholder="Enter quantity" required="" aria-label="item">
+    </div>
+    <div class="form-group" >
+      <select type="text" class="form-control" name="order_type" required="" style="width: 150px;">
+          <option value="All">All</option>
+          <option value="Collected">Collected</option>          
+          <option value="Pending">Pending</option>
+          <option value="Ready">Ready</option>
+
+      </select>
+    </div>
+      <div class="form-group" >
+      <select type="text" class="form-control" name="user" required="" style="width: 150px;">
+          <option value="All">Everyone</option>
+        {% for usr in users %}
+          <option value="{{ usr.id }}">{{ usr.first_name }} {{ usr.last_name }}</option>
+        {% endfor %}
+
+      </select>
+    
+    <input type="hidden" value="{{ tranid }}" name="transid">
+    <input type="hidden" value="{{ custid }}" name="custid">
+      <button style="width: 200px;" class="btn btn-info my-2 my-sm-0" type="submit">Search</button></div>
+    </form></cnter><br><br>
+
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+<br>
+<div class="pull-right" style="margin-right:100px;">
+    <a href="javascript:Clickheretoprint()" style="font-size:20px; position:absolute; margin-top: -10px; left: 1080px"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+    </div>
+  
+  <div class="content" id="content">
+<strong>{{ header }}</strong>
+<br><br>
+<table border="1" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Customer</th>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Due date</th>
+                        <th>Total item</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Sales person</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for order in orders %}
+                    
+                    <tr>
+                    <td>{{ order.customer.cust_name }}</td>
+                    <td>{{  order.transid }}</td>
+                    <td>{{ order.order_date|date:"F d, Y" }}</td>
+                    <td>{{ order.return_date|date:"F d, Y" }}</td>
+                    <td>{{ order.total_item }}</td>
+                    <td>{{  order.total }}</td>
+
+                    <td>{{  order.order_status }}</td>
+                    <td>{{  order.user.first_name }}</td>
+
+                    <td><a href="{% url 'view_order' order.transid %}">View</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  	
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="1" style=" text-align:right;"><strong style="font-size: 12px;">Total Cash: &nbsp;</strong></td>
+                      <td colspan="1">{{ total }}<strong style="font-size: 12px;">
+                      <td></td>
+                      <td></td>
+                      <td></td>
+
+
+
+          
+          </strong></td>
+        </tr>
+
+                  </tbody>
+                </table>
+              </div>
+    
+
+{% endblock %}

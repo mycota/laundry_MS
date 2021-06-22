@@ -1,0 +1,143 @@
+{% extends "fdesk/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h4 class="border-bottom border-gray pb-2 mb-0">Management Dashboard</h4>
+    <br>
+   
+    <div class="row">
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-users fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+           <div class='huge'><h5>Customers Manager</h5></div>
+                        <div>Total customers: {{ cust }}</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'view_customers' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Click here</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <!-- <i class="fa fa-anchor fa-5x"></i> -->
+                        <i class="fa fa-registered fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+           <div class='huge'><h5>Ready</h5></div>
+                        <div>Total item ready: {{ ready_c }}</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'pend_collect' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Click here</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-fw fa-briefcase fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+           <div class='huge'><h5>Pending Services</h5></div>
+                        <div>Total item pendding:   {{ pend_c }}</div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'pendding_order' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Click here</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <i class="fa fa-file-text fa-5x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+           <div class='huge'><h5>Report Manager</h5></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="{% url 'allorders' %}">
+                <div class="panel-footer">
+                    <span class="pull-left">Click here</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-lg-3 col-md-6">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <!-- <i class="fa fa-logout fa-5x"></i> -->
+                        <i class="fa fa-sign-out fa-4x"></i>
+                    </div>
+                    <div class="col-xs-9 text-right">
+
+           <div class='huge'><h5>LOGOUT</h5></div>
+                        <div></div>
+                    </div>
+                </div>
+            </div>
+            <a href="#">
+                <div class="panel-footer">
+                    <a href="{% url 'logout' %}"> <button type="button" class="btn btn-danger" style="background-color:;">
+		    Logout <span class="badge badge-light"> O</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                    <div class="clearfix"></div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+</center>
+</div>
+
+
+
+{% endblock %}

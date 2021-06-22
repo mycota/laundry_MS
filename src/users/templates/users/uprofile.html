@@ -1,0 +1,49 @@
+{% extends "adm/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %} 
+	
+	
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="{% url 'emply-view' %}">Users</a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Your Profile</h6>
+	
+	<div class="content-section">
+	  <div class="media">
+	    <img class="rounded-circle account-img" src="{{ user.employeeinfo.image.url }}">
+	    <div class="media-body">
+	      <h2 class="account-heading">{{ user.username }}</h2>
+	      <p class="text-secondary">{{ user.email }}</p>
+	      <p class="text-secondary">{{ user.first_name }} {{ user.last_name }}</p>
+	    </div>
+	  </div>
+	  <!-- FORM HERE -->
+
+	  <!-- <div class="container-section"> -->
+				<h4>Salary: {{ user.employeeinfo.salary }}</h4>
+
+		<form method="POST" enctype="multipart/form-data">
+			{% csrf_token %}
+
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Your information.</legend>
+				
+				{{ usr_form| crispy }}
+				{{ info_form| crispy }}
+				
+				
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Update</button>
+			</div>
+			
+		</form>
+			
+		
+	</div>
+
+</div>	
+	
+{% endblock %}

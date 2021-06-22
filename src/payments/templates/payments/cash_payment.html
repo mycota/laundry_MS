@@ -1,0 +1,71 @@
+{% extends "fdesk/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <script>
+    function changes(){
+            var total = document.getElementById('total').value;
+            var amtentered = document.getElementById('amt').value;
+            var balns = parseFloat(amtentered) - parseFloat(total);
+            if (!isNaN(balns)) {
+                document.getElementById('bals').value = balns;       
+            }
+        }
+  </script>
+
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h4 class="border-bottom border-gray pb-2 mb-0">Cash Payment</h4>
+    <br>
+  <div class="container-section">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'add_cash_payment' transid %}">
+      {% csrf_token %}
+      <center>
+        <h4>Complete Payment Process</h4>
+      <fieldset style="width: 350px; background-color: pink;">
+        <legend class="border-bottom mb-4"></legend>
+        
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" readonly name="customer" value="{{ customer }}" required>
+        </div>
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="total" readonly name="total" value="{{ total }}" required>
+        </div>
+
+        
+        <div class="mb-3">
+          <input type="text" class="form-control" id="amt" oninput="changes();" name="amt" placeholder="Enter cash given" required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="bals" name="bals" readonly required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+          <label>Due Date</label>
+          <input type="date" class="form-control" id="date" name="date" placeholder="Enter due date" required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+
+        
+        
+      </fieldset><br>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Complete</button>
+      </div>
+      </center>
+    </form>
+
+{% endblock %}

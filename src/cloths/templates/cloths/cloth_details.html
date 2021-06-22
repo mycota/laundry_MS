@@ -1,0 +1,35 @@
+{% extends "adm/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+   <main role="main" class="container">
+	<div class="row">
+        <div class="col-md-8">
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    	<large class="d-block text-right mt-3">
+      	<a href="{% url 'view_cloths' %}">Cloths</a>
+    	</large>
+	<div class="container-section">
+		<form method="POST" enctype="mutipart/form-data">
+			{% csrf_token %}
+			<fieldset class="form-group" style="width: 600px;">
+				<legend class="border-bottom mb-4">Cloth Details</legend>
+				{{ cloth_form| crispy }}
+			</fieldset>
+		</form>			
+	</div>
+</div>
+</div>
+	<div class="col-md-4">
+          <div class="content-section">
+            <h3>Facts About this cloth</h3>
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Total Turn out: {{ total }}</li>
+                <li class="list-group-item list-group-item-light">Last Date: {{ lastdate }}</li>
+                <li class="list-group-item list-group-item-light">Washed {{ count }} times</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

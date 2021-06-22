@@ -1,0 +1,81 @@
+{% extends "adm/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %} 
+	
+	
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="{% url 'emply-view' %}">Users</a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">User Details</h6>
+
+
+	<div class="pull-right" style="margin-right:100px;">
+		<a href="javascript:Clickheretoprint()" style="font-size:20px; position:absolute; margin-top: 40px; left: 800px"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+		</div>
+	
+	<div class="content" id="content">
+	<div class="content-section">
+	  <div class="media">
+	    <img class="rounded-circle account-img" src="{{ obj2.image.url }}">
+	    
+	  </div>
+	  <!-- FORM HERE -->
+	  <!-- <div class="container-section"> -->
+		
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">User information.</legend>
+				
+				<table class="table" style="background: ; ">
+   
+				    <tr>
+				    <td>
+				    <h4>Full name:</h4>
+				    <p class="text-secondary">{{ obj1.first_name }} {{ obj1.last_name }}</p>
+				    </td>
+				    <td>
+				    <h4>Phone:</h4>
+				    <p class="text-secondary">{{ obj2.phone }}</p>
+				    </td>
+				    <tr>
+				    <td>
+				    <h4>Email:</h4>
+				    <p class="text-secondary">{{ obj1.email }}</p>
+				    </td>
+				    <td>
+				    <h4>Gender:</h4>
+				    <p class="text-secondary">{{ obj2.gender }}</p>
+				    </td>  
+				    </tr>
+				    <tr>
+				    <td>
+				    <h4>Birth Date:</h4>
+				    <p class="text-secondary">{{ obj2.birth_date }}</p>
+				    </td>
+				    <td>
+				    <h4>Salary:</h4>
+				    <p class="text-secondary">{{ obj2.salary }}</p>
+				    </td>  
+				    </tr>
+				    <tr>
+				    <td>
+				    <h4>Address:</h4>
+				    <p class="text-secondary">{{ obj2.address }}</p>
+				    </td>
+				    <td>
+				    <h4>Department:</h4>
+				    <p class="text-secondary">{{ obj2.department }}</p>
+				    </td>  
+				    </tr>
+				</table>
+				
+			</fieldset>
+			
+		</div>	
+		
+	</div>
+
+</div>	
+	
+{% endblock %}

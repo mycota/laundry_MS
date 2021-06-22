@@ -1,0 +1,90 @@
+
+{% extends "fdesk/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="#"></a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Transaction History</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;"></h5></center>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<div class="pull-right" style="margin-right:100px;">
+    <a href="javascript:Clickheretoprint()" style="font-size:20px; position:absolute; margin-top: 40px; left: 800px"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+    </div>
+  
+  <div class="content" id="content">
+    <center><label>Transaction History</label></center>
+<br><br>
+    <table cellpadding="3" cellspacing="0" style="margin-top: -30px; font-family: arial; font-size: 12px;text-align:left;width : 100%;">
+
+    <tr>
+    <td>Customer name: {{ customers.cust_name }}</td></tr>
+        <tr><td>Phone: {{ customers.cust_phone }}</td></tr>
+        <tr><td>Email: {{ customers.cust_email }}</td></tr>
+        <tr><td>Address: {{ customers.cust_address }}</td></tr>
+        <tr><td>Customer No.: {{ customers.id }}</td></tr>
+  </table>
+  <br>
+  <br>
+<table class="table table-bordered table-hover" border="1">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Transaction ID</th>
+                        <th>Date</th>
+                        <th>Due date</th>
+                        <th>Total item</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>View</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for order in orders %}
+                    
+                    <tr>
+                    <td>{{  order.transid }}</td>
+                    <td>{{ order.order_date|date:"F d, Y" }}</td>
+                    <td>{{ order.return_date|date:"F d, Y" }}</td>
+                    <td>{{ order.total_item }}</td>
+                    <td>{{  order.total }}</td>
+                    <td>{{  order.order_status }}</td>
+                    <td><a href="{% url 'view_order' order.transid %}">View</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  	
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="1" style=" text-align:right;"><strong style="font-size: 12px;">Total Cash: &nbsp;</strong></td>
+                      <td colspan="1">{{ total }}<strong style="font-size: 12px;">
+                      <td></td>
+          
+          </strong></td>
+        </tr>
+
+                  </tbody>
+                </table>
+    
+
+{% endblock %}

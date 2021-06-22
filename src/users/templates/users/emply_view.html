@@ -1,0 +1,61 @@
+{% extends "adm/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="{% url 'add_user' %}">Add User</a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Current users</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;">
+All users </h5></center>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <!-- <th>Birth Date</th> -->
+                        <th>Dept</th>
+                        <th>Role</th>
+                        <th>Salary</th>
+                        <!-- <th>Image</th> -->
+                        <th>EmpDate</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for empplmodels in empmodel %}
+                    
+                    <tr>
+                    <td>{{ empplmodels.first_name }} {{ empplmodels.last_name }}</td>
+                    <td>{{ empplmodels.employeeinfo.gender }}</td>
+                    <td>{{ empplmodels.employeeinfo.phone }}</td>
+                    <td>{{ empplmodels.email }}</td>
+                    <!-- <td></td> -->
+                    <td>{{ empplmodels.employeeinfo.department }}</td>
+                    <td>{{ empplmodels.employeeinfo.role }}</td>
+                    <!-- <td></td> -->
+                    <td>{{ empplmodels.employeeinfo.salary }}</td>
+                    <!-- <td> <img width='120' height='90' src='' alt ='No image'></td> -->
+                    <td>{{ empplmodels.employeeinfo.employment_Date|date:"F d, Y" }}</td>
+                    <td><a href="{% url 'user_info_update' empplmodels.id %}">Edit</a>|<a href="{% url 'user_details' empplmodels.id %}">Details</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                  	
+
+                  </tbody>
+                </table>
+    
+
+{% endblock %}

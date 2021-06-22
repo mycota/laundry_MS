@@ -1,0 +1,50 @@
+{% extends "adm/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="{% url 'add_mac' %}">Add washing machine</a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Current washing machines</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;">
+All machines </h5></center>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Machine Name</th>
+                        <th>Model</th>
+                        <th>Manufacturer</th>
+                        <th>Price</th>
+                        <th>Date Bought</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for mach in mac %}
+                    
+                    <tr>
+                    <td>{{ mach.machine_name }}</td>
+                    <td>{{ mach.model }}</td>
+                    <td>{{ mach.manufacturer }}</td>
+                    <td>{{ mach.price }}</td>
+                    <td>{{ mach.date_bought|date:"F d, Y" }}</td>
+                    <td><a href="{% url 'update_mac' mach.id %}">Edit</a>|<a href="{% url 'mac_details' mach.id %}">Details</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                  	
+
+                  </tbody>
+                </table>
+    
+
+{% endblock %}

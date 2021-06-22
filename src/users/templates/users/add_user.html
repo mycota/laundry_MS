@@ -1,0 +1,33 @@
+{% extends "adm/base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %} 
+	
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    	<large class="d-block text-right mt-3">
+      	<a href="{% url 'emply-view' %}">Users</a>
+    	</large>
+    	<!-- <h6 class="border-bottom border-gray pb-2 mb-0">Add User</h6> -->
+
+
+	<div class="container-section">
+		<form method="POST" enctype="mutipart/form-data">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Add new user</legend>
+				{{ usr_form| crispy }}
+				
+			</fieldset>
+			<div class="form-group">
+				<button class="btn btn-outline-info" type="submit">Add user</button>
+			</div>
+			
+		</form>
+			
+		
+	</div>
+
+
+	
+
+{% endblock %}

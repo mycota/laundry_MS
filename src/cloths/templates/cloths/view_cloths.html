@@ -1,0 +1,81 @@
+
+{% extends "adm/base.html" %}
+
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+        <a href="{% url 'add_cloths' %}">Add new cloth</a>
+
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Current cloths</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;">
+All cloths </h5></center>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Name</th>
+                        <th>Wash Price</th>
+                        <th>Category</th>
+                        <th>Date Added</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for cloth in cloths %}
+                    
+                    
+                      <tr>
+                      <td>{{ cloth.cloth_name }}</td>
+                      <td>{{ cloth.wash_price }}</td>
+                      <td>{{ cloth.category }}</td>
+                      <td>{{  cloth.date_add|date:"F d, Y"}}</td>
+
+                      <td><a href="{% url 'update_cloths' cloth.id %}">Edit</a> </a> | <a href="{% url 'cloth_details' cloth.id %}">Details</a>
+                        | <a style="color: red;" href="{% url 'remove_cloth' cloth.id %}">Delete</a>
+                      </td>
+                      </tr>
+                      
+                  {% endfor %}
+
+                  {% if is_paginated %}
+
+                    {% if page_obj.has_previous %}
+                      <a class="btn btn-outline-info mb-4" href="?page=1">First</a>
+                      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+
+                      {% if page_obj.number == num %}
+                      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+                      {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                      <a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>
+
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">Next</a>
+                      <a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+                    {% endif %}
+
+                  {% endif %}
+                  	
+
+                  </tbody>
+                  
+                
+                </table>
+    
+
+{% endblock %}

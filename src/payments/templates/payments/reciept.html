@@ -1,0 +1,78 @@
+{% extends "fdesk/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h4 class="border-bottom border-gray pb-2 mb-0">Transaction Receipt</h4>
+    <br>
+    <div class="pull-right" style="margin-right:100px;">
+		<a href="javascript:Clickheretoprint()" style="font-size:20px; position:absolute; margin-top: 40px; left: 800px"><button class="btn btn-success btn-large"><i class="icon-print"></i> Print</button></a>
+		</div>
+	
+	<div class="content" id="content">
+    <center><label>Transaction Receipt System</label></center>
+    <hr>
+    <br><br>
+    <table cellpadding="3" cellspacing="0" style="margin-top: -30px; font-family: arial; font-size: 12px;text-align:left;width : 100%;">
+
+		<tr>
+		<td>Customer name: {{ customers.cust_name }}</td></tr>
+        <tr><td>Phone: {{ customers.cust_phone }}</td></tr>
+        <tr><td>Email: {{ customers.cust_email }}</td></tr>
+        <tr><td>Address: {{ customers.cust_address }}</td></tr>
+
+        <tr><td>Transaction ID: {{ transid }}</td></tr>
+
+        <tr><td>Date: {{ ordr.order_date|date:"F d, Y" }}</td></tr>
+
+         <tr><td>Due Date: {{ ordr.return_date|date:"F d, Y" }} </td></tr>
+	</table>
+	<br>
+	<br>
+
+	<div class="clearfix"></div>
+	<div style="width: 100%; margin-top:-70px;">
+	<table border="1" cellpadding="4" cellspacing="0" style="font-family: arial; font-size: 12px;	text-align:left;" width="100%">
+	<br><br><br><br>
+		<thead>
+			<tr>
+				<th>Cloth name</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Amount</th>
+			</tr>
+		</thead>
+		<tbody>
+			
+			{% for item in items %}
+				<tr class="record">
+				<td>{{ item.cloth_name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.unit_price }}</td>
+                <td>{{ item.sub_total}}</td>
+				
+				</tr>
+			{% endfor %}
+				<tr>
+				<td></td>
+				<td></td>
+				<td colspan="1" style=" text-align:right;"><strong style="font-size: 12px;">Total: &nbsp;</strong></td>
+					<td colspan="1">{{ total }}<strong style="font-size: 12px;">
+					
+					</strong></td>
+				</tr>
+				
+			
+		</tbody>
+	</table>
+	<br>
+	<center><div style="font:bold 12px 'Aleo';"></div>
+	Thank you for doing business with us<br>
+	God bless you.<br>	<br>
+	</center>
+
+    </div>
+
+{% endblock %}

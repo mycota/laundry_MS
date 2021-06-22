@@ -1,0 +1,53 @@
+{% extends "adm/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+    <large class="d-block text-right mt-3">
+      <a href="#"></a>
+    </large>
+    <h6 class="border-bottom border-gray pb-2 mb-0">Pedding orders</h6>
+
+<center><h5 class="page-header" style="background-color: #2F4F4F; color: white;">
+All pedding orders </h5></center>
+<input class="form-control" id="myInput" type="text" placeholder="Search..">
+  <br>
+<!-- <h4>Total users: {{ count }}</h4> -->
+<table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Due date</th>
+                        <th>Total item</th>
+                        <th>Amount</th>
+                        <th>Order ID</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                  
+                  {%for order in orders %}
+                    
+                    <tr>
+                    <td>{{ order.customer.cust_name }}</td>
+                    <td>{{ order.order_date|date:"F d, Y" }}</td>
+                    <td>{{ order.return_date|date:"F d, Y" }}</td>
+                    <td>{{ order.total_item }}</td>
+                    <td>{{  order.total }}</td>
+                    <td>{{  order.transid }}</td>
+
+                    <td><a href="{% url 'ready' order.transid %}">Ready</a>|<a href="{% url 'view_order' order.transid %}">View</a>|<a href="{% url 'collect' order.transid %}">Collect</a></td>
+                    </tr>
+                    
+                    {% endfor %}
+                  	
+
+                  </tbody>
+                </table>
+    
+
+{% endblock %}

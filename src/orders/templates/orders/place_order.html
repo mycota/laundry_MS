@@ -1,0 +1,88 @@
+{% extends "fdesk/base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+  <div class="my-3 p-3 bg-white rounded shadow-sm">
+      <large class="d-block text-right mt-3">
+        <a href="">Customers</a>
+      </large>
+  <div class="container-section">
+  <center>
+  <form class="form-inline my-2 m" method="POST" action="{% url 'place_order' custid %}">
+      {% csrf_token %}
+    
+    <div class="form-group" >
+      <select type="text" class="form-control" name="item" required="" style="width: 300px;">
+        <option value="">Select cloth</option>
+        {% for cloth in cloths %}
+          <option value="{{ cloth.id }}">{{ cloth.cloth_name }}</option>
+        {% endfor %}
+
+      </select>
+    </div>
+    <div class="form-group" style="width: 300px;">
+      <input type="number" name="qty" class="form-control" placeholder="Enter quantity" required="" aria-label="item">
+    </div>
+    <input type="hidden" value="{{ tranid }}" name="transid">
+    <input type="hidden" value="{{ custid }}" name="custid">
+      <button style="width: 300px;" class="btn btn-success my-2 my-sm-0" type="submit">Add</button>
+    </form><br><br>
+
+    <table class="table table-bordered table-hover">
+                    <thead style="background-color: black; color: white;">
+                      <tr>
+                        <!-- <th>Id</th> -->
+                        <th>Cloth name</th>
+                        <th>Quantity</th>
+                        <th>Unit price</th>
+                        <th>Amount</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>     
+                  <tbody id="myTable">
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                  
+                  {%for item in items %}
+                    <tr>
+                    <td>{{ item.cloth_name }}</td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.unit_price }}</td>
+                    <td>{{ item.sub_total}}</td>
+                    
+                    <td><a style="color: red" href="{% url 'remove_item' item.id %}">Remove</a></td>
+                    </tr>
+                      
+                    {% endfor %}
+                    
+                    <tr>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                      <th></th>
+                    </tr>
+
+                    <tr>
+                      <td colspan="1"><strong style="font-size: 15px; color: #222222;">Total</strong></td>
+                      <td></td>
+                      <td></td>
+                      <td colspan="1"><strong style="font-size: 15px; color: #222222;">{{ total }} </strong></td>
+                      <td></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+      <a href="{% url 'add_cash_payment' tranid %}"><button style="width: 300px;" class="btn btn-warning my-2 my-sm-0" type="submit">Cash Payment</button></a> | <a href="{% url 'add_card_payment' tranid %}"><button style="width: 300px;" class="btn btn-info my-2 my-sm-0" type="submit">Card Payment</button></a>
+
+  </center>
+  </div>
+</div>
+
+{% endblock %}

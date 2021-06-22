@@ -1,0 +1,53 @@
+{% extends "fdesk/base.html" %}
+
+{% load static %}
+
+{% block content %} 
+
+	<div class="my-3 p-3 bg-white rounded shadow-sm">
+    <h4 class="border-bottom border-gray pb-2 mb-0">Card Payment</h4>
+    <br>
+  <div class="container-section">
+    <form method="POST" enctype="mutipart/form-data" action="{% url 'add_card_payment' transid %}">
+      {% csrf_token %}
+      <center>
+        <h4>Complete Card Payment Process on POS device</h4>
+      <fieldset style="width: 350px; background-color: gray;">
+        <legend class="border-bottom mb-4"></legend>
+        
+        <input type="hidden" name="ptype" value="Card">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" readonly name="name" value="{{ customer }}" required>
+        </div>
+
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" readonly name="name" value="{{ total }}" required>
+        </div>
+
+        
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" name="payid" placeholder="Enter transaction ID from the POS device" required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+
+        <div class="mb-3">
+          <label>Due Date</label>
+          <input type="date" class="form-control" id="date" name="date" placeholder="Enter due date" required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+        
+        
+      </fieldset><br>
+      <div class="form-group">
+        <button class="btn btn-outline-info" type="submit">Complete</button>
+      </div>
+      </center>
+    </form>
+
+{% endblock %}

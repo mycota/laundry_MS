@@ -1,0 +1,64 @@
+<link rel="stylesheet" type="text/css" href="{% static 'css/form-validation.css' %}">
+    <link href="{% static 'css/offcanvas.css' %}" rel="stylesheet">
+
+    <link href="{% static '/css/floating-labels.css' %}" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="{% static 'images/secure.gif' %}">
+
+
+
+	{% for post in posts %}
+
+		<h1> {{ post.title }}</h1>
+		<p> By {{ post.author }} on {{ post.date_posted }}</p>
+		<p> {{ post.content }}</p>
+
+		Info from user account
+
+		Choices are: date_joined, email, employeeinfo, first_name, groups, id, is_active, is_staff, is_superuser, last_login, last_name, logentry, password, user_permissions, username
+
+	{% endfor %}
+
+
+
+
+
+	from django import forms
+from datetimepicker.widgets import DateTimePicker
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+
+class AddUserForm(UserCreationForm):
+	roles = (('Front Desk', 'Front Desk'),('Supervisor', 'Supervisor'),('Manager', 'Manager'),('Admin', 'Admin'),)
+	gend = (('Male', 'Male'), ('Famale', 'Famale'), )
+	mstu = (('Single', 'Single'), ('Married', 'Married'), )
+	dept = (('Sales', 'Sales'),('Accouts', 'Accouts'),('IT', 'IT'), )
+
+	class DateInput(forms.DateInput):
+		input_type = 'date'
+
+	email = forms.EmailField()
+	first_name = forms.CharField(max_length=50)
+	last_name = forms.CharField(max_length=70)
+	role = forms.ChoiceField(choices=roles)
+	phone = forms.CharField(max_length=10)
+	address = forms.CharField(widget=forms.Textarea,max_length=225)
+	gender = forms.ChoiceField(choices=gend)
+	birth_date = forms.DateField()
+	marrig_Status = forms.ChoiceField(choices=mstu)
+	department = forms.ChoiceField(choices=dept)
+	salary = forms.FloatField()
+	employment_Date = forms.DateField()
+	image = forms.ImageField(required=False)
+
+	# is_staff = forms.BooleanField() 'is_staff',
+	# is_active = forms.BooleanField(required=False) 
+	# is_superuser = forms.BooleanField(required=False)
+
+	class Meta:
+		model = User
+		fields = ['first_name','last_name','email', 'phone', 'address', 'gender', 'birth_date', 'marrig_Status', 'department', 'salary', 'employment_Date', 'image', 'role', 'username', 'password1', 'password2']
+
+
+class AddEmployeeInfo(forms.ModelForm):
+	

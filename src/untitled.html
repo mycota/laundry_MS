@@ -1,0 +1,48 @@
+<div class="mb-3">
+          <label for="mac_name">Machine Name</label>
+          <input type="text" class="form-control" value="{{ obj.mac_name }}" id="mac_name" name="mac_name" placeholder="Machine name" required>
+          <div class="invalid-feedback">
+            Valid name is required.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="mac_model">Model</label>
+          <input type="text" value="{{ obj.model }}" class="form-control" id="model" name="mac_model" placeholder="" required>
+          <div class="invalid-feedback">
+            Please enter model name.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="manu">Manufacturer</label>
+          <input type="text" value="{{ obj.manufactural }}" class="form-control" id="manu" name="manu" placeholder="Manufacturer" required>
+          <div class="invalid-feedback">
+            Please enter manufacturer.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="price">Price</label>
+          <input type="text" value="{{ obj.price }}" class="form-control" id="price" name="price" placeholder="Price" required>
+          <div class="invalid-feedback">
+            Please enter price.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="date">Date Bought</label>
+          <input type="date" value="{{ obj.date_bought|date:'d m Y' }}" class="form-control" id="date" name="date"  required>
+          <div class="invalid-feedback">
+            Please enter date.
+          </div>
+        </div>
+
+          <div class="mb-3">
+          <label for="mimage">Machine Image</label>
+          <input type="file"  value="{{ obj.image }}" class="form-control" id="mimage" name="mimage" required />
+          <div class="invalid-feedback">
+            Please select image.
+          </div>
+        </div> 
+       RSA key fingerprint is SHA256: nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8
