@@ -1,1 +1,1 @@
-web: gunicorn laundry.wsgi
+web: python manage.py runserver
